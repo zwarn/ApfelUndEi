@@ -134,9 +134,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3304b5696e58e438b52b2c6cdfded3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Balance: 0
+  Balance: 1000
   PlayerNumber: 2
   PlayerColor: {r: 0.7960785, g: 0.7960785, b: 0.7960785, a: 0}
+  moneyUI: {fileID: 0}
 --- !u!212 &212720877280928918
 SpriteRenderer:
   m_ObjectHideFlags: 1
