@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+	public int Balance;
 	public int PlayerNumber;
 	public Color PlayerColor;
 

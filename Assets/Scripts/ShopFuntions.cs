@@ -8,7 +8,7 @@ public class ShopFuntions : MonoBehaviour {
 	private GameObject FloatingTextInstance;
 	private float PriceFloat;
 	private float PriceInt;
-	private bool IsSelling = false;
+	private bool PrivIsSelling = false;
 	private GameObject SellingItem;
 	private GameObject SellingPlayer;
 
@@ -25,23 +25,27 @@ public class ShopFuntions : MonoBehaviour {
 		UpdateFloatingText();
 	}
 
-	void Sell(GameObject SellingItem, GameObject SellingPlayer) {
-		if (!IsSelling){
+	public bool IsSelling(){
+		return PrivIsSelling;
+	}
+
+	public void Sell(GameObject SellingItem, GameObject SellingPlayer) {
+		if (!PrivIsSelling){
 			this.SellingItem = SellingItem;
 			this.SellingPlayer = SellingPlayer;
-			IsSelling = true;
-			PriceFloat = SellingItem.Price();
+			PrivIsSelling = true;
+			PriceFloat = SellingItem.GetComponent<AnimalStats>().Price;
 		}
 	}
 
-	void Buy(GameObject BuyingPlayer) {
-		if (IsSelling){
-			if (BuyingPlayer.Balance < PriceInt){
+	public void Buy(GameObject BuyingPlayer) {
+		if (PrivIsSelling){
+			if (BuyingPlayer.GetComponent<PlayerController>().Balance < PriceInt){
 				return;	
 			}
-			BuyingPlayer.Balance -= PriceInt;
-			SellingPlayer.Balance += PriceInt;
-			DestroyFloatingText();
+			BuyingPlayer.GetComponent<PlayerController>().Balance -= PriceInt;
+			SellingPlayer.GetComponent<PlayerController>().Balance += PriceInt;
+			PrivIsSelling = false;
 		}
 	}
 	void CreateFloatingText(){
@@ -53,7 +57,7 @@ public class ShopFuntions : MonoBehaviour {
 	}
 
 	void UpdateFloatingText(){
-		if (IsSelling){
+		if (PrivIsSelling){
 			FloatingTextInstance.GetComponent<TextMesh>().text = PriceInt.ToString();
 		} else {
 			FloatingTextInstance.GetComponent<TextMesh>().text = "";
