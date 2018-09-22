@@ -27,7 +27,7 @@ public class QuestScript : MonoBehaviour
 		{
 			int index = Random.Range (0, allItems.Length);
 			choosenItems.Add(allItems[index]);
-			itemImages[choosenItems.Count - 1].sprite = allItems[index].GetComponent<SpriteRenderer>().sprite;
+			itemImages[choosenItems.Count - 1].sprite = allItems[index].GetComponentInChildren<SpriteRenderer>().sprite;
 		}
 
 		questItems = choosenItems;
