@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4524727669633002}
   - component: {fileID: 58302751559263628}
   - component: {fileID: 114485061970098706}
+  - component: {fileID: 50988522209385084}
   m_Layer: 0
   m_Name: Player 3
   m_TagString: Untagged
@@ -71,6 +72,26 @@ Transform:
   m_Father: {fileID: 4524727669633002}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50988522209385084
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1623004049519914}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &58302751559263628
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -97,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3304b5696e58e438b52b2c6cdfded3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerNumber: 3
-  _playerColor: {r: 0.24705884, g: 0.36862746, b: 0.41176474, a: 1}
+  PlayerNumber: 3
+  PlayerColor: {r: 0.24705884, g: 0.36862746, b: 0.41176474, a: 0}
 --- !u!212 &212111314789170118
 SpriteRenderer:
   m_ObjectHideFlags: 1
