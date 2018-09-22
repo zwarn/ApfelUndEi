@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    public int Balance = 1000;
+    public int Balance = 500;
     public int PlayerNumber;
     public Color PlayerColor;
     public Text moneyUI;
@@ -20,7 +20,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(item != null ? "holding " + item.name : "holding null");
+
+        Balance += 1;
+        
         Vector3 deltaMovement = new Vector3(Input.GetAxis("Horizontal " + PlayerNumber),
             Input.GetAxis("Vertical " + PlayerNumber), 0);
         _lookingDirection = deltaMovement.normalized;
@@ -35,12 +37,12 @@ public class PlayerController : MonoBehaviour
                     item = null;
                 }
 
-                HashSet<String> items = new HashSet<string>();
+                HashSet<int> items = new HashSet<int>();
                 foreach (var stand in stands)
                 {
                     if (stand.yield != null)
                     {
-                        items.Add(stand.yield.name);
+                        items.Add(stand.yield.GetComponent<AnimalStats>().Price);
                     }
                 }
                 if (QuestScript.Instance.Solve(items))

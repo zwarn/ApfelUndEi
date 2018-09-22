@@ -78,7 +78,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb7dd3ac9e4b0b47b0bd5afef1c6fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   FloatingTextPrefab: {fileID: 1198090087162156, guid: 5b96162d2ea27474fa93f4d3afb352db,
+    type: 2}
+  ChickenPrefab: {fileID: 1414529062503872, guid: 374157124db02d34cbd950ffba71fb72,
+    type: 2}
+  RabbitPrefab: {fileID: 1988568823316360, guid: dca1f636be492ca48b60b48803ee4620,
+    type: 2}
+  PigPrefab: {fileID: 1458463672094474, guid: c8aefd994572a634fa8e15b34043f89e, type: 2}
+  GoatPrefab: {fileID: 1524526545001088, guid: 408eb943fc859c740828e41b588aa8df, type: 2}
+  CowPrefab: {fileID: 1411076652708088, guid: be8bc3c032a24ed4a9bd4805dc29035a, type: 2}
+  HorsePrefab: {fileID: 1575505832177264, guid: e8bcd0d75cfbed343afc4cdc10f83f86,
     type: 2}
 --- !u!212 &212008122786333640
 SpriteRenderer:

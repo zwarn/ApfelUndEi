@@ -11,7 +11,7 @@ public class QuestScript : MonoBehaviour
 	public static QuestScript Instance = null;
 	
 	public GameObject[] allItems;
-	public HashSet<String> questItems;
+	public HashSet<int> questItems;
 	public Image[] itemImages;
 
 	private void Awake()
@@ -26,18 +26,18 @@ public class QuestScript : MonoBehaviour
 		GenerateQuest();
 	}
 
-	public bool Solve(HashSet<String> items)
+	public bool Solve(HashSet<int> items)
 	{
 		return questItems.SetEquals(items);
 	}
 
 	public void GenerateQuest()
 	{
-		var choosenItems = new HashSet<String>();
+		var choosenItems = new HashSet<int>();
 		while (choosenItems.Count < 3)
 		{
 			int index = Random.Range (0, allItems.Length);
-			choosenItems.Add(allItems[index].name);
+			choosenItems.Add(allItems[index].GetComponent<AnimalStats>().Price);
 			itemImages[choosenItems.Count - 1].sprite = allItems[index].GetComponentInChildren<SpriteRenderer>().sprite;
 		}
 

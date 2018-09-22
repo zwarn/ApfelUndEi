@@ -107,5 +107,11 @@ public class ShopFuntions : Interactable {
 	void UpdatePrice(){
 		PriceFloat *= Mathf.Exp(-0.05f * Time.deltaTime);
 		PriceInt = (int)PriceFloat;
+		if (PriceInt < 20)
+		{
+			Destroy(SellingItem);
+			SellingItem = null;
+			PrivIsSelling = false;
+		}
 	}
 }
