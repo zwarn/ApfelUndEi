@@ -7,7 +7,7 @@ public class ShopFuntions : MonoBehaviour {
 	public GameObject FloatingTextPrefab;
 	private GameObject FloatingTextInstance;
 	private float PriceFloat;
-	private float PriceInt;
+	private int PriceInt;
 	private bool PrivIsSelling = false;
 	private GameObject SellingItem;
 	private GameObject SellingPlayer;
