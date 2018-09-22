@@ -138,6 +138,10 @@ MonoBehaviour:
   PlayerNumber: 2
   PlayerColor: {r: 0.7960785, g: 0.7960785, b: 0.7960785, a: 0}
   moneyUI: {fileID: 0}
+  stands:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &212720877280928918
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -8,25 +8,36 @@ using Random = UnityEngine.Random;
 public class QuestScript : MonoBehaviour
 {
 
+	public static QuestScript Instance = null;
+	
 	public GameObject[] allItems;
-	public HashSet<GameObject> questItems;
+	public HashSet<String> questItems;
 	public Image[] itemImages;
+
+	private void Awake()
+	{
+		if (Instance == null)
+		{
+			Instance = this;
+		}
+	}
 
 	void Start () {
 		GenerateQuest();
 	}
-	
-	void Update () {
-		
+
+	public bool Solve(HashSet<String> items)
+	{
+		return questItems.SetEquals(items);
 	}
 
 	public void GenerateQuest()
 	{
-		var choosenItems = new HashSet<GameObject>();
+		var choosenItems = new HashSet<String>();
 		while (choosenItems.Count < 3)
 		{
 			int index = Random.Range (0, allItems.Length);
-			choosenItems.Add(allItems[index]);
+			choosenItems.Add(allItems[index].name);
 			itemImages[choosenItems.Count - 1].sprite = allItems[index].GetComponentInChildren<SpriteRenderer>().sprite;
 		}
 
