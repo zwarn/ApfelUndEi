@@ -7,6 +7,7 @@ public class StandScript : Interactable
 {
 
 	public GameObject yield;
+	public PlayerController owner;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,10 @@ public class StandScript : Interactable
 
 	public override void Give(PlayerController player, GameObject obj)
 	{
+		if (player != owner)
+		{
+			return;
+		}
 		if (yield == null)
 		{
 			yield = obj;
@@ -29,6 +34,10 @@ public class StandScript : Interactable
 
 	public override GameObject Take(PlayerController player)
 	{
+		if (player != owner)
+		{
+			return null;
+		}
 		GameObject result = yield;
 		yield = null;
 		return result;
