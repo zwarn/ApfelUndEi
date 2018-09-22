@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(item != null ? "holding " + item.name : "holding null");
         Vector3 deltaMovement = new Vector3(Input.GetAxis("Horizontal " + PlayerNumber),
             Input.GetAxis("Vertical " + PlayerNumber), 0);
         _lookingDirection = deltaMovement.normalized;
@@ -29,7 +30,10 @@ public class PlayerController : MonoBehaviour
         {
             if (item != null)
             {
-                standInRange.Give(this, item);
+                if (standInRange.Give(this, item))
+                {
+                    item = null;
+                }
 
                 HashSet<String> items = new HashSet<string>();
                 foreach (var stand in stands)

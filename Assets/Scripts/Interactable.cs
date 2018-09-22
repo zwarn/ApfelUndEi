@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Interactable : MonoBehaviour
 {
 
-	public abstract void Give(PlayerController player, GameObject obj);
+	public abstract bool Give(PlayerController player, GameObject obj);
 
 	public abstract GameObject Take(PlayerController player);
 	

@@ -20,9 +20,7 @@ public class ShopFuntions : Interactable {
 
 	// Use this for initialization
 	void Start () {
-		if (FloatingTextPrefab){
-			CreateFloatingText();
-		}
+		CreateFloatingText();
 	}
 	
 	// Update is called once per frame
@@ -30,7 +28,7 @@ public class ShopFuntions : Interactable {
 		UpdatePrice();
 		UpdateFloatingText();
 		if(!PrivIsSelling && (owner == null)){
-			if (Random.Range(0f, 10.0f) < Time.deltaTime){
+			if (Random.Range(0f, 2f) < Time.deltaTime){
 				SpawnItem();
 			}
 		}
@@ -41,15 +39,15 @@ public class ShopFuntions : Interactable {
 		if (randnr < 1){
 			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
 		} else if (randnr < 2){
-			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);	
+			SellingItem = Instantiate(RabbitPrefab, transform.position, Quaternion.identity, transform);	
 		} else if (randnr < 3){
-			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+			SellingItem = Instantiate(PigPrefab, transform.position, Quaternion.identity, transform);
 		} else if (randnr < 4){
-			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+			SellingItem = Instantiate(GoatPrefab, transform.position, Quaternion.identity, transform);
 		} else if (randnr < 5){
-			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+			SellingItem = Instantiate(CowPrefab, transform.position, Quaternion.identity, transform);
 		} else if (randnr < 6){
-			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+			SellingItem = Instantiate(HorsePrefab, transform.position, Quaternion.identity, transform);
 		} 
 		Give(null, SellingItem);
 	}
@@ -58,19 +56,22 @@ public class ShopFuntions : Interactable {
 		return PrivIsSelling;
 	}
 	
-	public override void Give(PlayerController SellingPlayer, GameObject SellingItem) {
+	public override bool Give(PlayerController SellingPlayer, GameObject SellingItem) {
 		if (!PrivIsSelling && (owner == SellingPlayer)){
 			this.SellingItem = SellingItem;
 			this.SellingPlayer = SellingPlayer;
 			PrivIsSelling = true;
 			PriceFloat = SellingItem.GetComponent<AnimalStats>().Price;
 			placeItem(this.SellingItem);
+			return true;
 		}
+
+		return false;
 	}
 
 	public override GameObject Take(PlayerController BuyingPlayer) {
 		if (PrivIsSelling){
-			if (owner == BuyingPlayer){
+			if (owner != BuyingPlayer){
 				if (BuyingPlayer.Balance < PriceInt){
 					return null;	
 				}
@@ -88,7 +89,7 @@ public class ShopFuntions : Interactable {
 		return null;
 	}
 	void CreateFloatingText(){
-		FloatingTextInstance = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+		FloatingTextInstance = Instantiate(FloatingTextPrefab, transform.position + new Vector3(0,0.5f,0), Quaternion.identity, transform);
 	}
 
 	private void OnDestroy(){
@@ -99,7 +100,7 @@ public class ShopFuntions : Interactable {
 		if (PrivIsSelling){
 			FloatingTextInstance.GetComponent<TextMesh>().text = PriceInt.ToString();
 		} else {
-			FloatingTextInstance.GetComponent<TextMesh>().text = "";
+			FloatingTextInstance.GetComponent<TextMesh>().text = "Sold";
 		}	
 	}
 

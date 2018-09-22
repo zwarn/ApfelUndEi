@@ -19,17 +19,20 @@ public class StandScript : Interactable
 		
 	}
 
-	public override void Give(PlayerController player, GameObject obj)
+	public override bool Give(PlayerController player, GameObject obj)
 	{
 		if (player != owner)
 		{
-			return;
+			return false;
 		}
 		if (yield == null)
 		{
 			yield = obj;
 			placeItem(obj);
+			return true;
 		}
+
+		return false;
 	}
 
 	public override GameObject Take(PlayerController player)
