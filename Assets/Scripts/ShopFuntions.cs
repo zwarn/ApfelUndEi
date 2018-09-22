@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopFuntions : Interactable {
-
+	public PlayerController owner;
 	public GameObject FloatingTextPrefab;
+	public GameObject ChickenPrefab;
+	public GameObject RabbitPrefab;
+	public GameObject PigPrefab;
+	public GameObject GoatPrefab;
+	public GameObject CowPrefab;
+	public GameObject HorsePrefab;
 	private GameObject FloatingTextInstance;
 	private float PriceFloat;
 	private int PriceInt;
@@ -23,6 +29,29 @@ public class ShopFuntions : Interactable {
 	void Update () {
 		UpdatePrice();
 		UpdateFloatingText();
+		if(!PrivIsSelling && (owner == null)){
+			if (Random.Range(0f, 10.0f) < Time.deltaTime){
+				SpawnItem();
+			}
+		}
+	}
+
+	void SpawnItem(){
+		float randnr = Random.Range(0f, 6.0f);
+		if (randnr < 1){
+			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+		} else if (randnr < 2){
+			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);	
+		} else if (randnr < 3){
+			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+		} else if (randnr < 4){
+			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+		} else if (randnr < 5){
+			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+		} else if (randnr < 6){
+			SellingItem = Instantiate(ChickenPrefab, transform.position, Quaternion.identity, transform);
+		} 
+		Give(null, SellingItem);
 	}
 
 	public bool IsSelling(){
@@ -30,8 +59,7 @@ public class ShopFuntions : Interactable {
 	}
 	
 	public override void Give(PlayerController SellingPlayer, GameObject SellingItem) {
-		Debug.Log("sell");
-		if (!PrivIsSelling){
+		if (!PrivIsSelling && (owner == SellingPlayer)){
 			this.SellingItem = SellingItem;
 			this.SellingPlayer = SellingPlayer;
 			PrivIsSelling = true;
@@ -42,13 +70,16 @@ public class ShopFuntions : Interactable {
 
 	public override GameObject Take(PlayerController BuyingPlayer) {
 		if (PrivIsSelling){
-			if (BuyingPlayer.Balance < PriceInt){
-				return null;	
+			if (owner == BuyingPlayer){
+				if (BuyingPlayer.Balance < PriceInt){
+					return null;	
+				}
+				BuyingPlayer.Balance -= PriceInt;
+				if (owner != null){
+					SellingPlayer.Balance += PriceInt;
+				}
 			}
-			BuyingPlayer.Balance -= PriceInt;
-			SellingPlayer.Balance += PriceInt;
 			PrivIsSelling = false;
-			
 			GameObject soldItem = SellingItem;
 			SellingItem = null;
 			return soldItem;

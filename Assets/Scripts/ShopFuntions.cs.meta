@@ -3,7 +3,16 @@ guid: 0fb7dd3ac9e4b0b47b0bd5afef1c6fbd
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - owner: {instanceID: 0}
+  - FloatingTextPrefab: {fileID: 1198090087162156, guid: 5b96162d2ea27474fa93f4d3afb352db,
+      type: 2}
+  - ChickenPrefab: {instanceID: 0}
+  - RabbitPrefab: {instanceID: 0}
+  - PigPrefab: {instanceID: 0}
+  - GoatPrefab: {instanceID: 0}
+  - CowPrefab: {instanceID: 0}
+  - HorsePrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
