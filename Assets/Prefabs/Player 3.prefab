@@ -92,7 +92,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58609718127378238
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da3304b5696e58e438b52b2c6cdfded3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Balance: 0
   PlayerNumber: 3
   PlayerColor: {r: 0.24705884, g: 0.36862746, b: 0.41176474, a: 0}
 --- !u!212 &212111314789170118

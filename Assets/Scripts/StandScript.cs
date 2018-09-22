@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Analytics;
 
-public class StandScript : MonoBehaviour
+public class StandScript : Interactable
 {
 
 	public GameObject yield;
@@ -18,17 +18,16 @@ public class StandScript : MonoBehaviour
 		
 	}
 
-	public void Give(GameObject obj)
+	public override void Give(PlayerController player, GameObject obj)
 	{
 		if (yield == null)
 		{
 			yield = obj;
-			obj.transform.parent = transform;
-			obj.transform.localPosition = new Vector3();
+			placeItem(obj);
 		}
 	}
 
-	public GameObject Take()
+	public override GameObject Take(PlayerController player)
 	{
 		GameObject result = yield;
 		yield = null;

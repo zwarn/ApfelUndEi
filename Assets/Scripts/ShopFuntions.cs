@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopFuntions : MonoBehaviour {
+public class ShopFuntions : Interactable {
 
 	public GameObject FloatingTextPrefab;
 	private GameObject FloatingTextInstance;
@@ -10,7 +10,7 @@ public class ShopFuntions : MonoBehaviour {
 	private int PriceInt;
 	private bool PrivIsSelling = false;
 	private GameObject SellingItem;
-	private GameObject SellingPlayer;
+	private PlayerController SellingPlayer;
 
 	// Use this for initialization
 	void Start () {
@@ -28,31 +28,39 @@ public class ShopFuntions : MonoBehaviour {
 	public bool IsSelling(){
 		return PrivIsSelling;
 	}
-
-	public void Sell(GameObject SellingItem, GameObject SellingPlayer) {
+	
+	public override void Give(PlayerController SellingPlayer, GameObject SellingItem) {
+		Debug.Log("sell");
 		if (!PrivIsSelling){
 			this.SellingItem = SellingItem;
 			this.SellingPlayer = SellingPlayer;
 			PrivIsSelling = true;
 			PriceFloat = SellingItem.GetComponent<AnimalStats>().Price;
+			placeItem(this.SellingItem);
 		}
 	}
 
-	public void Buy(GameObject BuyingPlayer) {
+	public override GameObject Take(PlayerController BuyingPlayer) {
 		if (PrivIsSelling){
-			if (BuyingPlayer.GetComponent<PlayerController>().Balance < PriceInt){
-				return;	
+			if (BuyingPlayer.Balance < PriceInt){
+				return null;	
 			}
-			BuyingPlayer.GetComponent<PlayerController>().Balance -= PriceInt;
-			SellingPlayer.GetComponent<PlayerController>().Balance += PriceInt;
+			BuyingPlayer.Balance -= PriceInt;
+			SellingPlayer.Balance += PriceInt;
 			PrivIsSelling = false;
+			
+			GameObject soldItem = SellingItem;
+			SellingItem = null;
+			return soldItem;
 		}
+
+		return null;
 	}
 	void CreateFloatingText(){
 		FloatingTextInstance = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
 	}
 
-	void DestroyFloatingText(){
+	private void OnDestroy(){
 		Destroy(FloatingTextInstance);
 	}
 
