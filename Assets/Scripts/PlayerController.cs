@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+	public int Balance = 1000;
 	public int PlayerNumber;
 	public Color PlayerColor;
 
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 	private Vector3 _lookingDirection = new Vector3();
 
 	private GameObject item = null;
-	private StandScript standInRange = null;
+	private Interactable standInRange = null;
 	
 	// Use this for initialization
 	void Start () {
@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour
 		{
 			if (item != null)
 			{
-				standInRange.Give(item);	
+				standInRange.Give(this, item);	
 			} else
 			{
-				item = standInRange.Take();
+				item = standInRange.Take(this);
 				item.transform.parent = gameObject.transform;
 				item.transform.localPosition = new Vector3();
 			}
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D other)
 	{
 
-		StandScript stand = other.gameObject.GetComponent<StandScript>();
+		Interactable stand = other.gameObject.GetComponent<Interactable>();
 		if (stand != null)
 		{
 			standInRange = stand;
